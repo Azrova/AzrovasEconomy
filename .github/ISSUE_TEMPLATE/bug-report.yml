@@ -11,7 +11,7 @@ body:
     validations:
       required: true
 
-  - type: checkbox
+  - type: checkboxs
     id: latest-version
     attributes:
       label: Are you running the latest version? (Of plugin)
@@ -20,7 +20,7 @@ body:
     validations:
       required: false
 
-  - type: checkbox
+  - type: checkboxs
     id: searched
     attributes:
       label: Have you searched GitHub issues and our Discord server for this problem?
