@@ -1,0 +1,51 @@
+name: 🐛 Bug Report
+description: Report something that isn't working as expected.
+labels: [bug]
+body:
+  - type: input
+    id: mc-version
+    attributes:
+      label: Minecraft Version
+      description: Run `/icanhasbukkit` in console if you're unsure.
+      placeholder: "e.g. 1.20.4-R0.1-SNAPSHOT"
+    validations:
+      required: true
+
+  - type: checkbox
+    id: latest-version
+    attributes:
+      label: Are you running the latest version? (Of plugin)
+      options:
+        - label: Yes, I'm on the latest version.
+    validations:
+      required: false
+
+  - type: checkbox
+    id: searched
+    attributes:
+      label: Have you searched GitHub issues and our Discord server for this problem?
+      options:
+        - label: Yes, I’ve searched and didn’t find anything relevant.
+    validations:
+      required: true
+
+  - type: dropdown
+    id: bug-type
+    attributes:
+      label: What type of bug?
+      options:
+        - Auction House
+        - Payment
+        - Leaderboard
+        - Other
+    validations:
+      required: true
+
+  - type: textarea
+    id: description
+    attributes:
+      label: Describe the bug
+      description: Please explain clearly what is happening.
+      placeholder: "Steps to reproduce, expected vs actual behavior, etc."
+    validations:
+      required: true

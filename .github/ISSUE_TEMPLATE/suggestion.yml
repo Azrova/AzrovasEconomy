@@ -1,0 +1,33 @@
+name: 💡 Suggestion
+description: Suggest a new feature or improvement.
+labels: [enhancement]
+body:
+  - type: dropdown
+    id: suggestion-type
+    attributes:
+      label: What type of suggestion?
+      options:
+        - New Jobs
+        - API Integration
+        - Commands
+        - Other
+    validations:
+      required: true
+
+  - type: input
+    id: concept-art
+    attributes:
+      label: Concept Art / Sketch (optional)
+      description: Provide a link to any concept art or mockup if you have one.
+      placeholder: "https://imgur.com/..."
+    validations:
+      required: false
+
+  - type: textarea
+    id: suggestion-details
+    attributes:
+      label: Describe your suggestion
+      description: Share what the feature is, how it would work, and why it’s valuable.
+      placeholder: "Write your suggestion here..."
+    validations:
+      required: true
