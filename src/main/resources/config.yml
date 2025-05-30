@@ -1,0 +1,106 @@
+# Azrova's Simple Economy Configuration
+
+options:
+  # The symbol to use for currency. E.g., $, €, £
+  currency-symbol: "$"
+
+  # The base command alias for administrative and other economy functions.
+  # If you change this, you might also want to add it as an alias in plugin.yml for full functionality.
+  # The primary command registered is still "eco" as defined in plugin.yml.
+  eco-command-alias: "eco"
+
+  # The amount of money a player starts with when they first join the server.
+  starting-balance: 100.0
+
+  # Settings for the /eco top command
+  eco-top:
+    # Number of players to display in /eco top
+    list-length: 10
+    # How often (in seconds) to update the cached /eco top list. Frequent updates can be resource-intensive.
+    update-interval: 300 # 5 minutes
+
+daily-reward:
+  amount: 100.0
+  # Cooldown in seconds for the /eco daily command (e.g., 86400 for 24 hours)
+  cooldown: 86400
+
+jobs:
+  # Money earned per action for each job. Action types are specific to job listeners.
+  # FARMER: e.g., per crop harvested (WHEAT, CARROTS, POTATOES, BEETROOTS, NETHER_WART)
+  # MINER: e.g., per ore mined (COAL_ORE, IRON_ORE, COPPER_ORE, GOLD_ORE, REDSTONE_ORE, LAPIS_ORE, DIAMOND_ORE, EMERALD_ORE, ANCIENT_DEBRIS)
+  # LUMBERJACK: e.g., per log broken (OAK_LOG, SPRUCE_LOG, BIRCH_LOG, JUNGLE_LOG, ACACIA_LOG, DARK_OAK_LOG, MANGROVE_LOG, CHERRY_LOG, CRIMSON_STEM, WARPED_STEM)
+  # EXPLORER: e.g., per new chunk entered (this one is trickier and might require a more complex listener)
+  rewards:
+    FARMER:
+      WHEAT: 0.50
+      CARROTS: 0.50
+      POTATOES: 0.50
+      BEETROOTS: 0.60
+      NETHER_WART: 1.0
+      PUMPKIN: 0.75
+      MELON: 0.75
+      SUGAR_CANE: 0.25 # Per block broken
+      CACTUS: 0.25 # Per block broken
+      COCOA: 0.40 # Per harvested cocoa bean item (not block)
+    MINER:
+      COAL_ORE: 0.75
+      DEEPSLATE_COAL_ORE: 0.85
+      IRON_ORE: 1.50
+      DEEPSLATE_IRON_ORE: 1.60
+      COPPER_ORE: 1.00
+      DEEPSLATE_COPPER_ORE: 1.10
+      GOLD_ORE: 2.50
+      DEEPSLATE_GOLD_ORE: 2.75
+      REDSTONE_ORE: 1.25 # Consider payment on first break, not per dust
+      DEEPSLATE_REDSTONE_ORE: 1.35
+      LAPIS_ORE: 1.75
+      DEEPSLATE_LAPIS_ORE: 1.85
+      DIAMOND_ORE: 5.00
+      DEEPSLATE_DIAMOND_ORE: 5.50
+      EMERALD_ORE: 4.00
+      DEEPSLATE_EMERALD_ORE: 4.50
+      NETHER_GOLD_ORE: 1.00
+      NETHER_QUARTZ_ORE: 0.80
+      ANCIENT_DEBRIS: 20.00
+    LUMBERJACK:
+      OAK_LOG: 0.50
+      SPRUCE_LOG: 0.55
+      BIRCH_LOG: 0.50
+      JUNGLE_LOG: 0.65
+      ACACIA_LOG: 0.60
+      DARK_OAK_LOG: 0.70
+      CHERRY_LOG: 0.60
+      MANGROVE_LOG: 0.65
+      CRIMSON_STEM: 0.80
+      WARPED_STEM: 0.80
+    EXPLORER:
+      # Payment per unique new chunk explored. This is a placeholder; actual implementation will be simpler for now.
+      # For a real explorer job, you might give a flat rate per X unique chunks or upon discovering biomes.
+      # A simple implementation might just be a very small reward for moving a certain distance in new areas.
+      # We will simplify this for now to a time-based earning or a placeholder.
+      # Let's make Explorer a passive job that earns a small amount over time while job is active (handled elsewhere or just for show in info)
+      # For now, Explorer won't have block-break type rewards. Its rewards could be tied to /daily or a future /jobs paycheck system.
+      PASSIVE_EARNING_PER_HOUR: 50.0 # Example, actual implementation of this is complex and deferred.
+    FISHERMAN:
+      COD: 0.75
+      SALMON: 0.85
+      TROPICAL_FISH: 1.50
+      PUFFERFISH: 1.25
+      # Treasure items (less frequent, higher reward)
+      NAUTILUS_SHELL: 5.00
+      SADDLE: 10.00
+      NAME_TAG: 8.00
+      BOW: 3.00 # Enchanted bows could have higher value, this is base
+      ENCHANTED_BOOK: 7.00 # Base, actual value depends on enchantment
+      FISHING_ROD: 2.50 # Enchanted rods higher value
+      # Junk items (low or no reward, can be used to penalize if desired, or just ignore)
+      LILY_PAD: 0.10
+      BOWL: 0.05
+      LEATHER_BOOTS: 0.20
+      ROTTEN_FLESH: 0.01
+      STICK: 0.01
+      STRING: 0.05
+      POTION: 0.50 # Assuming base water bottle or awkward potion
+      BONE: 0.10
+      INK_SAC: 0.25
+      TRIPWIRE_HOOK: 0.15 

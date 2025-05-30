@@ -1,0 +1,68 @@
+name: AzrovasSimpleEconomy
+version: 1.2
+main: com.example.azrovassimpleeconomy.AzrovasSimpleEconomy
+api-version: '1.21'
+softdepend: [Vault, PlaceholderAPI, VaultUnlocked]
+authors: [CNethuka]
+description: A simple and configurable economy plugin.
+
+commands:
+  balance:
+    description: Shows your current balance.
+    usage: /balance
+    aliases: [bal]
+    permission: azrovaseconomy.balance
+  eco:
+    description: Main command for Azrova's Simple Economy.
+    usage: /eco <subcommand> [args]
+    aliases: [azrovaseconomy]
+    permission: azrovaseconomy.access # General access to /eco, subcommands have specific perms
+  jobs:
+    description: Manage your job.
+    usage: /jobs <join|leave|info> [job_name]
+    aliases: [job]
+    permission: azrovaseconomy.jobs.access # General access to /jobs
+
+permissions:
+  azrovaseconomy.access:
+    description: Allows basic access to the /eco command.
+    default: true
+  azrovaseconomy.balance:
+    description: Allows usage of the /balance (and /bal) command.
+    default: true
+  azrovaseconomy.pay:
+    description: Allows usage of the /eco pay command.
+    default: true
+  azrovaseconomy.help:
+    description: Allows usage of the /eco help command for user commands.
+    default: true
+  azrovaseconomy.top:
+    description: Allows usage of the /eco top command.
+    default: true
+  azrovaseconomy.admin.add:
+    description: Allows usage of the /eco add command.
+    default: op
+  azrovaseconomy.admin.withdraw:
+    description: Allows usage of the /eco withdraw command.
+    default: op
+  azrovaseconomy.admin.help:
+    description: Allows usage of the /eco help command to see admin commands.
+    default: op
+  azrovaseconomy.admin.remove:
+    description: Allows usage of the /eco remove (account) command.
+    default: op
+  azrovaseconomy.daily:
+    description: Allows usage of the /eco daily command.
+    default: true
+  azrovaseconomy.jobs.access:
+    description: Allows basic access to the /jobs command.
+    default: true
+  azrovaseconomy.jobs.join:
+    description: Allows joining a job.
+    default: true
+  azrovaseconomy.jobs.leave:
+    description: Allows leaving a job.
+    default: true
+  azrovaseconomy.jobs.info:
+    description: Allows viewing job information.
+    default: true 
