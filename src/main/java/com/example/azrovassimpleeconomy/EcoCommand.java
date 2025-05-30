@@ -291,6 +291,9 @@ public class EcoCommand implements CommandExecutor, TabCompleter {
         if (sender.hasPermission("azrovaseconomy.daily")) {
             sender.sendMessage(ChatColor.YELLOW + "/" + ecoCmd + " daily" + ChatColor.GRAY + " - Claim your daily reward.");
         }
+        if (sender.hasPermission("azrovaseconomy.jobs.access")) {
+            sender.sendMessage(ChatColor.YELLOW + "/jobs" + ChatColor.GRAY + " - Access job-related commands.");
+        }
         if (sender.hasPermission("azrovaseconomy.help")) {
             sender.sendMessage(ChatColor.YELLOW + "/" + ecoCmd + " help" + ChatColor.GRAY + " - Shows this help message.");
         }
