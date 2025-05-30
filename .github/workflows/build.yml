@@ -20,5 +20,5 @@ jobs:
       - name: Upload Jar file
         uses: actions/upload-artifact@v4
         with:
-          name: "CustomDiscs"
+          name: "AzrovasEconomy"
           path: "build/libs/*.jar"
