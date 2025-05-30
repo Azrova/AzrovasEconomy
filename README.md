@@ -51,7 +51,7 @@ For the latest updates, bug reports, and feature requests, please visit the [Git
 
 ## Installation
 
-1.  Download the latest `AzrovasSimpleEconomy-X.X.jar` from the releases page (or build it yourself).
+1.  Download the latest `AzrovasSimpleEconomy-X.X.X.jar` from the releases page (or build it yourself).
 2.  Place the JAR file into your server's `plugins` folder.
 3.  Ensure you have [Vault](https://www.spigotmc.org/resources/vault.34315/) installed for economy features to work.
 4.  (Optional) Install [PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) if you want to use the placeholders.
@@ -73,7 +73,3 @@ The configuration file (`config.yml`) is located in the `plugins/AzrovasSimpleEc
 2.  Navigate to the project directory: `cd AzrovasEconomy`
 3.  Build the plugin using Gradle: `./gradlew shadowJar` (Linux/macOS) or `gradlew.bat shadowJar` (Windows).
 4.  The compiled JAR will be in the `build/libs/` directory.
-
----
-
-This README provides a basic template. Feel free to expand upon it with more details, contribution guidelines, or a license if you make the repository public. 
