@@ -1,4 +1,4 @@
-# Azrova's Simple Economy
+# Azrova's Simple Economy - Use this verison at your own risk, there may be a few bugs and features missing for a proper Economy plugin! Newer version is coming soon with more features.
 
 A simple, lightweight, and configurable economy plugin for PaperMC servers, designed to be easy to use and integrate with other plugins like Vault and PlaceholderAPI.
 
