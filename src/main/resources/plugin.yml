@@ -1,0 +1,82 @@
+name: ${pluginName}
+version: ${pluginVersion}
+main: ${mainClass}
+api-version: ${apiVersion}
+description: ${description}
+authors: ${authors}
+website: ${website}
+depend: ${depend}
+softdepend: ${softDepends}
+
+commands:
+  pay:
+    description: Pay a user an amount of money.
+    usage: /pay [user] [amount]
+    permission: azrova.economy.pay
+    default: true
+  withdraw:
+    description: Withdraw a banknote with the amount of money.
+    usage: /withdraw [amount]
+    permission: azrova.economy.withdraw
+    default: true
+  help:
+    description: Shows a list of topics or commands.
+    usage: /help [topic]
+    permission: azrova.economy.help
+    default: true
+  balance:
+    description: Shows the balance of the user.
+    usage: /balance
+    aliases: [bal]
+    permission: azrova.economy.balance
+    default: true
+  money:
+    description: Shows the top richest players or manages economy.
+    usage: /money top
+    permission: azrova.economy.money.top
+    default: true
+  eco:
+    description: Admin economy commands.
+    usage: /eco [set|remove|delete] [username] [amount]
+    permission: azrova.admin
+    default: op
+  daily:
+    description: Claim your daily reward.
+    usage: /daily
+    permission: azrova.economy.daily
+    default: true
+
+permissions:
+  azrova.economy.pay:
+    description: Allows a player to pay another player.
+    default: true
+  azrova.economy.withdraw:
+    description: Allows a player to withdraw money as a banknote.
+    default: true
+  azrova.economy.help:
+    description: Allows a player to use the help command.
+    default: true
+  azrova.economy.balance:
+    description: Allows a player to check their balance.
+    default: true
+  azrova.economy.balance.others:
+    description: Allows a player to check other players' balances.
+    default: op
+  azrova.economy.money.top:
+    description: Allows a player to see the richest players.
+    default: true
+  azrova.admin:
+    description: Base permission for admin commands.
+    default: op
+  azrova.admin.set:
+    description: Allows an admin to set a player's balance.
+    default: op
+  azrova.admin.remove:
+    description: Allows an admin to remove money from a player's balance.
+    default: op
+  azrova.admin.delete:
+    description: Allows an admin to delete a player's economy account.
+    default: op
+  azrova.economy.daily:
+    description: Allows a player to claim their daily reward.
+    default: true 
