@@ -1,6 +1,5 @@
 # Azrova's Economy
 
-
 A robust and feature-rich economy plugin for PaperMC servers, designed to provide essential economic functionalities with support for Vault and optional PlaceholderAPI integration.
 
 ---
@@ -8,15 +7,16 @@ A robust and feature-rich economy plugin for PaperMC servers, designed to provid
 ## Features
 
 *   **Core Economy via Vault:** Leverages Vault for broad compatibility with other economy-related plugins.
-*   **Player Accounts:** Basic account management for player balances.
+*   **Player Account Management:** Complete user account creation, removal, and access control system.
+*   **User Access Control:** Administrators can remove users from the economy system, preventing access to all economy commands.
 *   **Configurable Starting Balance:** Set a starting amount for new players.
 *   **Daily Rewards:** Allow players to claim a configurable daily reward.
 *   **Player-to-Player Payments:** `/pay` command for transferring money.
 *   **Banknotes:** `/withdraw` command to create physical banknotes that can be redeemed.
 *   **Balance Checking:** `/balance` command for players to check their own or others' balances (permission-based).
 *   **Richest Players List:** `/money top` command to display the top N richest players.
-*   **Admin Commands:** Comprehensive set of `/eco` commands for administrators to manage player economies.
-*   **Help System:** In-game help via `/help [topic]` for economy and admin commands.
+*   **Organized Admin Commands:** Separate command sets for balance management and user management.
+*   **Comprehensive Help System:** In-game help via `/eco help [topic]` for economy, admin, and user management commands.
 *   **PlaceholderAPI Support (Optional):** Display player balances via `%azrovaseconomy_balance%`.
 *   **Configurable Currency Symbol:** Customize the currency symbol (e.g., $, €, etc.) in `config.yml`.
 *   **SQLite Data Storage:** Player data is saved locally using SQLite, requiring no external database setup.
@@ -25,7 +25,7 @@ A robust and feature-rich economy plugin for PaperMC servers, designed to provid
 
 ## Dependencies
 
-*   **[Vault](https://www.spigotmc.org/resources/vault.34315/) (Required):** Azrova's Economy relies on Vault to provide the economy G_API. This plugin will not function without Vault installed.
+*   **[Vault](https://www.spigotmc.org/resources/vault.34315/) (Required):** Azrova's Economy relies on Vault to provide the economy API. This plugin will not function without Vault installed.
 *   **[PlaceholderAPI](https://www.spigotmc.org/resources/placeholderapi.6245/) (Optional):** If you wish to use placeholders like `%azrovaseconomy_balance%` in other plugins (e.g., scoreboards, chat), PlaceholderAPI must be installed. The plugin will function normally without it, but placeholders will not be available.
 
 ---
@@ -49,11 +49,13 @@ The plugin will generate a `config.yml` file in its plugin folder (`plugins/Azro
 starting-balance: 100.0
 daily-reward-amount: 100.0
 currency-symbol: "$"
+daily-enabled: true
 ```
 
 *   `starting-balance`: The amount of money a player receives when they join the server for the first time and an account is created for them.
 *   `daily-reward-amount`: The amount of money a player receives when they use the `/daily` command.
 *   `currency-symbol`: The symbol used before amounts in messages (e.g., "$100.00").
+*   `daily-enabled`: Whether the daily reward system is enabled. Set to `false` to disable the `/daily` command entirely.
 
 ---
 
@@ -61,19 +63,86 @@ currency-symbol: "$"
 
 Below is a list of commands and their associated permissions. Permissions set to `true` under `default` are enabled for all users by default. Permissions set to `op` are enabled for server operators by default.
 
+### Player Commands
+
 | Command                      | Description                                      | Permission                        | Default    |
 | ---------------------------- | ------------------------------------------------ | --------------------------------- | ---------- |
 | `/pay [user] [amount]`       | Pay a user an amount of money.                   | `azrova.economy.pay`              | `true`     |
 | `/withdraw [amount]`         | Withdraw money as a physical banknote.           | `azrova.economy.withdraw`         | `true`     |
-| `/help [topic]`              | Shows help for specified topic (economy, admin). | `azrova.economy.help`             | `true`     |
 | `/balance` or `/bal`         | Shows your current balance.                      | `azrova.economy.balance`          | `true`     |
 | `/balance [user]`            | Shows another user's balance.                    | `azrova.economy.balance.others`   | `op`       |
 | `/money top`                 | Shows the top richest players.                   | `azrova.economy.money.top`        | `true`     |
 | `/daily`                     | Claim your daily reward.                         | `azrova.economy.daily`            | `true`     |
-| **Admin Commands (`/eco`)**  | Base permission for all `/eco` subcommands.      | `azrova.admin`                    | `op`       |
+
+### Admin Commands
+
+#### Help System
+| Command                      | Description                                      | Permission                        | Default    |
+| ---------------------------- | ------------------------------------------------ | --------------------------------- | ---------- |
+| `/eco help`                  | Shows available help topics.                     | `azrova.admin`                    | `op`       |
+| `/eco help economy`          | Shows general economy commands help.              | `azrova.admin`                    | `op`       |
+| `/eco help admin`            | Shows admin balance commands help.                | `azrova.admin`                    | `op`       |
+| `/eco help user`             | Shows user management commands help.              | `azrova.admin`                    | `op`       |
+
+#### Balance Management (Legacy /eco commands)
+| Command                      | Description                                      | Permission                        | Default    |
+| ---------------------------- | ------------------------------------------------ | --------------------------------- | ---------- |
 | `/eco set [user] [amount]`   | Set a user's balance.                            | `azrova.admin.set`                | `op`       |
 | `/eco remove [user] [amount]`| Remove money from a user.                        | `azrova.admin.remove`             | `op`       |
 | `/eco delete [user]`         | Delete a user's economy account.                 | `azrova.admin.delete`             | `op`       |
+
+#### Balance Management (New /eco admin commands)
+| Command                        | Description                                      | Permission                        | Default    |
+| ------------------------------ | ------------------------------------------------ | --------------------------------- | ---------- |
+| `/eco admin set [user] [amount]`| Set a user's balance.                           | `azrova.admin.set`                | `op`       |
+| `/eco admin add [user] [amount]`| Add money to a user's balance.                  | `azrova.admin.add`                | `op`       |
+| `/eco admin remove [user] [amount]`| Remove money from a user.                    | `azrova.admin.remove`             | `op`       |
+| `/eco admin delete [user]`     | Delete a user's economy account.                 | `azrova.admin.delete`             | `op`       |
+
+#### User Management
+| Command                        | Description                                      | Permission                        | Default    |
+| ------------------------------ | ------------------------------------------------ | --------------------------------- | ---------- |
+| `/eco user create [username]`  | Create an economy account for a user.            | `eco.admin.user.create`           | `op`       |
+| `/eco user remove [username]`  | Remove a user's economy account.                 | `eco.admin.user.remove`           | `op`       |
+
+### Base Admin Permission
+| Permission                   | Description                                      | Default    |
+| ---------------------------- | ------------------------------------------------ | ---------- |
+| `azrova.admin`               | Base permission for all admin commands.          | `op`       |
+
+---
+
+## User Access Control
+
+Azrova's Economy includes a comprehensive user access control system:
+
+### Account Management
+- **Account Creation:** Administrators can create economy accounts for users with `/eco user create [username]`
+- **Account Removal:** Administrators can remove users from the economy system with `/eco user remove [username]`
+- **Access Prevention:** Removed users cannot use any economy commands until their account is recreated
+
+### Removed User Behavior
+When a user's economy account is removed:
+- All economy commands (`/balance`, `/pay`, `/withdraw`, `/daily`) will fail with a clear error message
+- The user receives the message: "You do not have an economy account. Contact an administrator."
+- No automatic account recreation occurs - accounts must be manually recreated by administrators
+- Other players cannot pay money to removed users
+
+### Account Recreation
+- Removed users can have their accounts recreated using `/eco user create [username]`
+- New accounts start with the configured starting balance
+- All economy functionality is restored upon account recreation
+
+---
+
+## Help System
+
+The plugin features a comprehensive in-game help system accessible through `/eco help`:
+
+- **`/eco help`** - Shows all available help topics
+- **`/eco help economy`** - Lists all player economy commands
+- **`/eco help admin`** - Lists all admin balance management commands
+- **`/eco help user`** - Lists all user management commands with usage notes
 
 ---
 
@@ -83,6 +152,7 @@ If PlaceholderAPI is installed, the following placeholder is available:
 
 *   `%azrovaseconomy_balance%`: Displays the player's current balance, formatted with the configured currency symbol.
     *   Example: `You have: %azrovaseconomy_balance%` might display as `You have: $150.50`
+    *   Returns `$0.00` for users without economy accounts
 
 ---
 

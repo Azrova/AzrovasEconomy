@@ -20,14 +20,14 @@ public class HelpCommand implements CommandExecutor {
                 ChatColor.YELLOW + "/pay [player] [amount] " + ChatColor.GRAY + "- Pay another player.",
                 ChatColor.YELLOW + "/withdraw [amount] " + ChatColor.GRAY + "- Withdraw money as a banknote.",
                 ChatColor.YELLOW + "/money top " + ChatColor.GRAY + "- See the richest players.",
-                ChatColor.YELLOW + "/help economy " + ChatColor.GRAY + "- Shows this help page."
+                ChatColor.YELLOW + "/eco help economy " + ChatColor.GRAY + "- Shows this help page."
         });
         helpTopics.put("admin", new String[]{
                 ChatColor.GOLD + "--- Admin Economy Help ---",
                 ChatColor.YELLOW + "/eco set [player] [amount] " + ChatColor.GRAY + "- Set a player's balance.",
                 ChatColor.YELLOW + "/eco remove [player] [amount] " + ChatColor.GRAY + "- Remove money from a player.",
                 ChatColor.YELLOW + "/eco delete [player] " + ChatColor.GRAY + "- Delete a player's economy account.",
-                ChatColor.YELLOW + "/help admin " + ChatColor.GRAY + "- Shows this admin help page."
+                ChatColor.YELLOW + "/eco help admin " + ChatColor.GRAY + "- Shows this admin help page."
         });
     }
 

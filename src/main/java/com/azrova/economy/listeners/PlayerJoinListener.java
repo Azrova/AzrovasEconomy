@@ -28,8 +28,7 @@ public class PlayerJoinListener implements Listener {
         if (!econ.hasAccount(player)) {
             double startingBalance = plugin.getStartingBalance();
             econ.createPlayerAccount(player);
-            econ.depositPlayer(player, startingBalance);
             plugin.getLogger().info(String.format("Created account for %s with starting balance of %s", player.getName(), econ.format(startingBalance)));
         }
     }
-} 
+}

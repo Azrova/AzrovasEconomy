@@ -42,6 +42,11 @@ public class WithdrawCommand implements CommandExecutor {
             return true;
         }
 
+        if (!plugin.getDatabaseManager().playerExists(player.getUniqueId())) {
+            player.sendMessage(ChatColor.RED + "You do not have an economy account. Contact an administrator.");
+            return true;
+        }
+
         if (args.length != 1) {
             player.sendMessage(ChatColor.RED + "Usage: /withdraw [amount]");
             return true;
@@ -98,4 +103,4 @@ public class WithdrawCommand implements CommandExecutor {
     private String formatCurrency(double amount, Economy econ) {
         return plugin.getCurrencySymbol() + String.format("%.2f", amount);
     }
-} 
+}

@@ -19,11 +19,6 @@ commands:
     usage: /withdraw [amount]
     permission: azrova.economy.withdraw
     default: true
-  help:
-    description: Shows a list of topics or commands.
-    usage: /help [topic]
-    permission: azrova.economy.help
-    default: true
   balance:
     description: Shows the balance of the user.
     usage: /balance
@@ -37,7 +32,7 @@ commands:
     default: true
   eco:
     description: Admin economy commands.
-    usage: /eco [set|remove|delete] [username] [amount]
+    usage: /eco [help|admin|user|set|remove|delete] [player] [amount]
     permission: azrova.admin
     default: op
   daily:
@@ -71,12 +66,21 @@ permissions:
   azrova.admin.set:
     description: Allows an admin to set a player's balance.
     default: op
+  azrova.admin.add:
+    description: Allows an admin to add money to a player's balance.
+    default: op
   azrova.admin.remove:
     description: Allows an admin to remove money from a player's balance.
     default: op
   azrova.admin.delete:
     description: Allows an admin to delete a player's economy account.
     default: op
+  eco.admin.user.create:
+    description: Allows an admin to create an economy account for a user.
+    default: op
+  eco.admin.user.remove:
+    description: Allows an admin to remove a user's economy account.
+    default: op
   azrova.economy.daily:
     description: Allows a player to claim their daily reward.
-    default: true 
+    default: true

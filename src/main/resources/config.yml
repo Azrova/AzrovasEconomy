@@ -1,3 +1,4 @@
 starting-balance: 100.0
 daily-reward-amount: 100.0
 currency-symbol: "$"
+daily-enabled: true

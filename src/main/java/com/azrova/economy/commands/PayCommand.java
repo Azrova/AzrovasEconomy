@@ -38,10 +38,21 @@ public class PayCommand implements CommandExecutor {
         }
 
         Player player = (Player) sender;
+        
+        if (!plugin.getDatabaseManager().playerExists(player.getUniqueId())) {
+            player.sendMessage(ChatColor.RED + "You do not have an economy account. Contact an administrator.");
+            return true;
+        }
+        
         OfflinePlayer target = Bukkit.getOfflinePlayer(args[0]);
 
         if (!target.hasPlayedBefore() && !target.isOnline()) {
             player.sendMessage(ChatColor.RED + "Player not found.");
+            return true;
+        }
+        
+        if (!plugin.getDatabaseManager().playerExists(target.getUniqueId())) {
+            player.sendMessage(ChatColor.RED + "Target player does not have an economy account.");
             return true;
         }
 
@@ -85,4 +96,4 @@ public class PayCommand implements CommandExecutor {
     private String formatCurrency(double amount, Economy econ) {
         return plugin.getCurrencySymbol() + String.format("%.2f", amount);
     }
-} 
+}

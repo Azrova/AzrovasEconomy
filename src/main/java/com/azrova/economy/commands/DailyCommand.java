@@ -37,6 +37,11 @@ public class DailyCommand implements CommandExecutor {
             return true;
         }
 
+        if (!plugin.getDatabaseManager().playerExists(player.getUniqueId())) {
+            player.sendMessage(ChatColor.RED + "You do not have an economy account. Contact an administrator.");
+            return true;
+        }
+
         Economy econ = plugin.getVaultEconomyProvider();
         if (econ == null) {
             player.sendMessage(ChatColor.RED + "Economy system not properly initialized. Please contact an administrator.");
@@ -99,4 +104,4 @@ public class DailyCommand implements CommandExecutor {
     private String formatCurrency(double amount) {
         return plugin.getCurrencySymbol() + String.format("%.2f", amount);
     }
-} 
+}

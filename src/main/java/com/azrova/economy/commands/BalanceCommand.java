@@ -38,6 +38,10 @@ public class BalanceCommand implements CommandExecutor {
                 return true;
             }
             Player player = (Player) sender;
+            if (!plugin.getDatabaseManager().playerExists(player.getUniqueId())) {
+                player.sendMessage(ChatColor.RED + "You do not have an economy account. Contact an administrator.");
+                return true;
+            }
             double balance = econ.getBalance(player);
             player.sendMessage(ChatColor.GREEN + "Your balance: " + ChatColor.GOLD + formatCurrency(balance));
         } else {
@@ -59,4 +63,4 @@ public class BalanceCommand implements CommandExecutor {
     private String formatCurrency(double amount) {
         return plugin.getCurrencySymbol() + String.format("%.2f", amount);
     }
-} 
+}

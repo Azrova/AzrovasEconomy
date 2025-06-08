@@ -88,7 +88,7 @@ public class AzrovaVaultEconomy implements Economy {
     @Override
     public double getBalance(OfflinePlayer player) {
         if (!hasAccount(player)) {
-            createPlayerAccount(player);
+            return 0.0;
         }
         return dbManager.getPlayerBalance(player.getUniqueId());
     }
@@ -169,9 +169,7 @@ public class AzrovaVaultEconomy implements Economy {
             return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Cannot deposit negative amount.");
         }
         if (!hasAccount(player)) {
-            if (!createPlayerAccount(player, plugin.getStartingBalance())) {
-                 return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Could not create account for deposit.");
-            }
+            return new EconomyResponse(0, 0, EconomyResponse.ResponseType.FAILURE, "Account does not exist.");
         }
         if (dbManager.updateBalance(player.getUniqueId(), getBalance(player) + amount)) {
             return new EconomyResponse(amount, getBalance(player), EconomyResponse.ResponseType.SUCCESS, "");
@@ -267,4 +265,4 @@ public class AzrovaVaultEconomy implements Economy {
     public List<String> getBanks() {
         return Collections.emptyList();
     }
-} 
+}

@@ -1,6 +1,8 @@
 package com.azrova.economy;
 
 import com.azrova.economy.commands.*;
+import com.azrova.economy.commands.admin.BalanceAdminCommand;
+import com.azrova.economy.commands.admin.UserAdminCommand;
 import com.azrova.economy.listeners.BanknoteListener;
 import com.azrova.economy.listeners.PlayerJoinListener;
 import net.milkbowl.vault.economy.Economy;
@@ -15,6 +17,7 @@ public class AzrovasEconomy extends JavaPlugin {
     private double startingBalance;
     private double dailyRewardAmount;
     private String currencySymbol;
+    private boolean dailyEnabled;
     private AzrovaVaultEconomy vaultEconomyProvider;
 
     @Override
@@ -23,6 +26,7 @@ public class AzrovasEconomy extends JavaPlugin {
         this.startingBalance = getConfig().getDouble("starting-balance", 100.0);
         this.dailyRewardAmount = getConfig().getDouble("daily-reward-amount", 100.0);
         this.currencySymbol = getConfig().getString("currency-symbol", "$");
+        this.dailyEnabled = getConfig().getBoolean("daily-enabled", true);
 
         if (getServer().getPluginManager().getPlugin("Vault") == null) {
             getLogger().severe("Vault plugin not found! Azrova's Economy requires Vault to function.");
@@ -67,11 +71,12 @@ public class AzrovasEconomy extends JavaPlugin {
     private void registerCommands() {
         Objects.requireNonNull(getCommand("pay")).setExecutor(new PayCommand(this));
         Objects.requireNonNull(getCommand("withdraw")).setExecutor(new WithdrawCommand(this));
-        Objects.requireNonNull(getCommand("help")).setExecutor(new HelpCommand());
         Objects.requireNonNull(getCommand("balance")).setExecutor(new BalanceCommand(this));
         Objects.requireNonNull(getCommand("money")).setExecutor(new MoneyCommand(this));
         Objects.requireNonNull(getCommand("eco")).setExecutor(new EcoCommand(this));
-        Objects.requireNonNull(getCommand("daily")).setExecutor(new DailyCommand(this));
+        if (dailyEnabled) {
+            Objects.requireNonNull(getCommand("daily")).setExecutor(new DailyCommand(this));
+        }
     }
 
     private void registerListeners() {
@@ -94,8 +99,12 @@ public class AzrovasEconomy extends JavaPlugin {
     public String getCurrencySymbol() {
         return currencySymbol;
     }
+
+    public boolean isDailyEnabled() {
+        return dailyEnabled;
+    }
     
     public Economy getVaultEconomyProvider() {
         return vaultEconomyProvider;
     }
-} 
+}
