@@ -1,6 +1,6 @@
 # Azrova's Economy
 
-A robust and feature-rich economy plugin for PaperMC servers, designed to provide essential economic functionalities with support for Vault and optional PlaceholderAPI integration.
+A robust and feature-rich economy plugin for PaperMC/Bukkit servers, designed to provide essential economic functionalities with support for Vault and optional PlaceholderAPI integration.
 
 ---
 
